@@ -1,13 +1,13 @@
 # parallelSSH
 
-FIXME: write description
-
+A simple clojure CLI/Library to run a ssh command in parallel on multiple servers
 ## Usage
 
-FIXME: write
+LEIN_SNAPSHOTS_IN_RELEASE="something" lein uberjar
+java -jar parallel-ssh-0.1-standalone.jar --timeout 60000 -u statsuser --servers s1.example.com,s2.example.com "df -ah | grep sda1"
 
 ## License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2012 RJMetrics
 
 Distributed under the Eclipse Public License, the same as Clojure.
