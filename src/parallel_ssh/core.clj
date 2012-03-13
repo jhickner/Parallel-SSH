@@ -1,6 +1,6 @@
 (ns ^{:doc "Runs any arbitary bash command on all servers in parallel"
       :author "Chris McBride"} 
-  parallelSSH.core
+  parallel-ssh.core
   (:use [clojure.string :only [replace-first split upper-case trim-newline join]]
         [clojure.java.shell :only [sh]]
         [clojure.tools.cli :only (cli)]
