@@ -1,4 +1,4 @@
-(defproject parallelSSH "1.0.0-SNAPSHOT"
+(defproject parallelSSH "0.1"
   :description "Runs a command on multiple servers in parallel"
   :dependencies [[org.clojure/clojure "1.3.0"]
                  [org.clojure/tools.cli "0.2.1"]
