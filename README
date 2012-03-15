@@ -6,6 +6,8 @@ A simple clojure CLI/Library to run a ssh command in parallel on multiple server
 LEIN_SNAPSHOTS_IN_RELEASE="something" lein uberjar
 java -jar parallel-ssh-0.1-standalone.jar --timeout 60000 -u statsuser --servers s1.example.com,s2.example.com "df -ah | grep sda1"
 
+look at http://info.rjmetrics.com/blog/bid/54114/Parallel-SSH-and-system-monitoring-in-Clojure for more info
+
 ## License
 
 Copyright (C) 2012 RJMetrics
