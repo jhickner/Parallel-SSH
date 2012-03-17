@@ -47,14 +47,17 @@
 (defn run-commands
   "Calls run-command for each server in parallel using agents"
   [cmd-name servers username & [optional-timeout-ms _]]
-    (let [agents (doall (map #(agent (map->CommandResult {:server %, :username username})) servers))]
+    (let [agents (doall (map #(agent (map->CommandResult {:server %, :username username})) servers))
+          deref-agents (fn []
+                       (doall (map #(deref %) agents)))]
       (do
         (doseq [x agents] (send-off x run-command cmd-name))
         ;Sometimes a server might be hanging on ssh, if we kill the process we should see what we got from the other servers
-        (set-break-handler! (comp (fn [& _] (System/exit 1)) (partial println "\nCAUGHT SIGINT!\n") format-outputs shutdown-and-deref-agents))
+        (set-break-handler! (comp (fn [& _] (System/exit 1)) (partial println "\nCAUGHT SIGINT!\n") format-outputs deref-agents))
         (if (integer? optional-timeout-ms)
           (apply await-for optional-timeout-ms agents)
-          (apply await agents)))))
+          (apply await agents))
+        (deref-agents))))
 
 (defn valid-server-response? [^CommandResult {:keys [exit]}]
   (and (not (nil? exit)) (zero? exit)))
